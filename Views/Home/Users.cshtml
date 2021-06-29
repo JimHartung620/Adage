@@ -1,0 +1,57 @@
+@model MembersWrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <partial name="HeaderPartial" />
+
+    <div class="container">
+        
+        <h1>Members</h1>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">User #</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Registered On</th>
+                    <th scope="col">Account Type</th>
+                    @if (Model.UserLoggedIn.isAdmin)
+                    {
+                        <th scope="col">Actions</th>
+                    }
+                </tr>
+            </thead>
+            @foreach(User user in Model.AllUsers)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@user.UserId</th>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.CreatedAt.ToString("MM/dd/yyyy")</td>
+                        @if (Model.UserLoggedIn.isAdmin)
+                        {
+                            <td>Admin</td>
+                            <td><a asp-action="Delete/{@user.UserId}" asp-controller="Home" class="btn btn-primary">Delete</a></td>
+                        }
+                        else
+                        {
+                            <td>Poster/Commenter</td>
+                        }
+                    </tr>
+                </tbody>
+            }
+        </table>
+
+    </div>
+</body>
+</html>

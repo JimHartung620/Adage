@@ -1,0 +1,46 @@
+@model IndexWrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <partial name="HeaderPartial" />
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Start a Discussion</h1>
+                <partial name="PostPartial" model="Model.NewPost"/>
+            </div>
+        </div>
+        <div class="container">
+            @foreach (Post post in Model.AllPosts)
+            {
+                <div class="row">
+                    <h4>@post.Title - @post.Poster.UserName</h4>
+                </div>
+                <div class="row offset-md-1">
+                    <p>@post.Body</p>
+                </div>
+                foreach (Comment comment in post.Comments)
+                {
+                    <div class="row offset-md-1">
+                        <h6>@comment.Commenter.UserName</h6>
+                    </div>
+                    <div class="row offset-md-1">
+                        <p>@comment.Body</p>
+                    </div>
+                }
+                <form asp-action="CreateComment" asp-route-PostId="@post.PostId" asp-controller="Home" method="post">
+                    <partial name="CommentPartial" model="Model.NewComment"/>
+                </form>
+            }
+        </div>
+    </main>
+</body>
+</html>

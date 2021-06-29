@@ -1,0 +1,58 @@
+@model User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <partial name="HeaderPartial" />
+    <div class="container">
+        
+        <h1>Edit Profile</h1>
+
+        <div class="row">
+            <div class="col">
+                <h4>Edit Information</h4>
+                <form asp-action="UpdateProfile" asp-route-UserId="@Model.UserId" asp-controller="Home" method="post">
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="FirstName"></span>
+                        <label asp-for="FirstName" class="col-sm-4"></label>
+                        <input asp-for="FirstName" value="@Model.FirstName" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="LastName"></span>
+                        <label asp-for="LastName" class="col-sm-4"></label>
+                        <input asp-for="LastName" value="@Model.LastName" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="UserName"></span>
+                        <label asp-for="UserName" class="col-sm-4"></label>
+                        <input asp-for="UserName" value="@Model.UserName" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Email"></span>
+                        <label asp-for="Email" class="col-sm-4"></label>
+                        <input asp-for="Email" value="@Model.Email" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Description"></span>
+                        <label asp-for="Description" class="col-sm-4"></label>
+                        <input asp-for="Description" value="@Model.Description" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <input type="submit" value="Submit" class="col-sm-4 offset-sm-4 btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <h4>Change Password</h4>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+@model ProfileWrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <partial name="HeaderPartial" />
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>@Model.UserLoggedIn.FirstName @Model.UserLoggedIn.LastName</h1>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Registered On: </h3>
+                    <p class="col-sm-3">@Model.UserLoggedIn.CreatedAt.ToString("MM/dd/yyyy")</p>
+                </div>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Last Update: </h3>
+                    <p class="col-sm-3">@Model.UserLoggedIn.UpdatedAt.ToString("MM/dd/yyyy")</p>
+                </div>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Username: </h3>
+                    <p class="col-sm-3">@Model.UserLoggedIn.UserName</p>
+                </div>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Email: </h3>
+                    <p class="col-sm-3">@Model.UserLoggedIn.Email</p>
+                </div>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Motto: </h3>
+                    <p class="col-sm-3">@Model.UserLoggedIn.Description</p>
+                </div>
+                <div class="row offset-sm-1">
+                    <h6 class="col-sm-3">Account Type: </h3>
+                    @{
+                        if (Model.UserLoggedIn.isAdmin)
+                        {
+                            <p class="col-sm-3">Admin</p>
+                        }
+                        else
+                        {
+                            <p class="col-sm-3">Poster/Commenter</p>
+                        }
+                    }
+                </div>
+                <a asp-action="EditProfile" asp-controller="Home" asp-route-UserId="@Model.UserLoggedIn.UserId" class="mb-3 offset-md-1 btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="offset-md-1">
+                @foreach (Post post in Model.UserPosts)
+                {
+                    <div class="row">
+                        <h4>@post.Title</h4>
+                    </div>
+                    <div class="row offset-md-1">
+                        <p>@post.Body</p>
+                    </div>
+                    foreach (Comment comment in post.Comments)
+                    {
+                        <div class="row offset-md-1">
+                            <h6>@comment.Commenter.UserName</h6>
+                        </div>
+                        <div class="row offset-md-1">
+                            <p>@comment.Body</p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </main>
+</body>
+</html>

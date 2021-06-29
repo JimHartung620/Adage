@@ -1,0 +1,16 @@
+@model Post
+<form asp-action="CreatePost" asp-controller="Home" method="post">
+    <div class="form-group row">
+        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Title"></span>
+        <label asp-for="Title" class="col-sm-4"></label>
+        <input asp-for="Title" class="col-sm-8 form-control">
+    </div>
+    <div class="form-group row">
+        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="Body"></span>
+        <label asp-for="Body" class="col-sm-4"></label>
+        <textarea asp-for="Body" class="col-sm-8 form-control"></textarea>
+    </div>
+    <div class="form-group row">
+        <input type="submit" value="Post a message" class="col-sm-4 offset-sm-4 btn btn-primary">
+    </div>
+</form>
